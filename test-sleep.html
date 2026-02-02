@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试 - 睡眠记录</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .test-box {
+            background: red;
+            color: white;
+            padding: 50px;
+            font-size: 32px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .info-box {
+            background: yellow;
+            padding: 20px;
+            margin: 20px 0;
+            border: 3px solid black;
+        }
+        .button {
+            background: blue;
+            color: white;
+            padding: 20px 40px;
+            font-size: 24px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>测试页面</h1>
+
+    <div class="test-box">
+        如果你能看到这个红色方块，说明 HTML 和 CSS 正常工作！
+    </div>
+
+    <div class="info-box">
+        <p><strong>当前页面：</strong><span id="currentPage"></span></p>
+        <p><strong>时间：</strong><span id="time"></span></p>
+    </div>
+
+    <button class="button" onclick="alert('按钮点击成功！')">
+        ✅ 点击测试按钮
+    </button>
+
+    <div class="info-box">
+        <h3>请告诉我：</h3>
+        <ol>
+            <li>你看到红色方块了吗？</li>
+            <li>你看到蓝色按钮了吗？</li>
+            <li>点击按钮有弹窗吗？</li>
+        </ol>
+    </div>
+
+    <script>
+        document.getElementById('currentPage').textContent = window.location.href;
+        document.getElementById('time').textContent = new Date().toLocaleString('zh-CN');
+
+        console.log('测试页面加载成功');
+        console.log('当前 URL:', window.location.href);
+        console.log('React root:', document.getElementById('root'));
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npm run dev:*)",
+      "Bash(curl:*)",
+      "Bash(node:*)",
+      "mcp__web-search-prime__webSearchPrime",
+      "Bash(pkill:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill:*)",
+      "WebSearch",
+      "Bash(wc:*)",
+      "Bash(npm run build:*)",
+      "Bash(pwdx:*)",
+      "Bash(npm run dev:server:*)",
+      "Bash(npm run)",
+      "Bash(cat:*)",
+      "Bash(python3:*)",
+      "Bash(npx tsc:*)",
+      "Bash(find:*)",
+      "Bash(xargs:*)",
+      "Bash(npm rebuild:*)",
+      "Bash(npx cap init:*)",
+      "Bash(npx cap add:*)",
+      "Bash(npx cap sync:*)",
+      "Bash(cmd.exe /c \"echo %USERNAME%\")",
+      "Bash(./gradlew:*)",
+      "Bash(sudo apt:*)",
+      "Bash(cmd.exe:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git config:*)"
+    ]
+  }
+}

@@ -1,0 +1,255 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* iOS 风格全局样式 */
+:root {
+  --ios-blue: #007AFF;
+  --ios-green: #34C759;
+  --ios-red: #FF3B30;
+  --ios-orange: #FF9500;
+  --ios-yellow: #FFCC00;
+  --ios-purple: #AF52DE;
+  --ios-pink: #FF2D55;
+  --ios-teal: #5AC8FA;
+  --ios-gray: #8E8E93;
+  --ios-gray2: #AEAEB2;
+  --ios-gray3: #C7C7CC;
+  --ios-gray4: #D1D1D6;
+  --ios-gray5: #E5E5EA;
+  --ios-gray6: #F2F2F7;
+  --ios-background: #FFFFFF;
+  --ios-separator: #C6C6C8;
+  --ios-label: #000000;
+  --ios-secondary-label: #3C3C43;
+  --ios-tertiary-label: #3C3C4399;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display',
+               'Helvetica Neue', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* 舒缓的绿色大自然渐变背景 */
+  background: linear-gradient(135deg,
+    #e8f5e9 0%,     /* 浅绿 */
+    #c8e6c9 25%,    /* 嫩绿 */
+    #a5d6a7 50%,    /* 草绿 */
+    #c8e6c9 75%,    /* 嫩绿 */
+    #e8f5e9 100%    /* 浅绿 */
+  );
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: var(--ios-label);
+}
+
+/* iOS 按钮样式 */
+.ios-btn {
+  @apply px-4 py-3 rounded-xl font-medium transition-all duration-200 active:scale-95;
+  background-color: var(--ios-blue);
+  color: white;
+}
+
+.ios-btn:active {
+  opacity: 0.8;
+}
+
+.ios-btn-green {
+  background-color: var(--ios-green);
+}
+
+.ios-btn-red {
+  background-color: var(--ios-red);
+}
+
+.ios-btn-gray {
+  background-color: var(--ios-gray5);
+  color: var(--ios-secondary-label);
+}
+
+/* iOS 卡片样式 */
+.ios-card {
+  @apply rounded-2xl p-4;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.1);
+}
+
+/* 通用半透明白色卡片 */
+.bg-white-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+}
+
+/* iOS 输入框样式 */
+.ios-input {
+  @apply w-full px-4 py-3 rounded-xl bg-white;
+  border: 1px solid var(--ios-gray4);
+  font-size: 17px;
+  transition: border-color 0.2s;
+}
+
+.ios-input:focus {
+  outline: none;
+  border-color: var(--ios-blue);
+}
+
+/* iOS 列表样式 */
+.ios-list {
+  @apply rounded-2xl overflow-hidden;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+}
+
+.ios-list-item {
+  @apply px-4 py-3;
+  border-bottom: 1px solid var(--ios-gray5);
+  transition: background-color 0.2s;
+}
+
+.ios-list-item:last-child {
+  border-bottom: none;
+}
+
+.ios-list-item:active {
+  background-color: var(--ios-gray6);
+}
+
+/* iOS 开关样式 */
+.ios-switch {
+  position: relative;
+  width: 51px;
+  height: 31px;
+  background-color: var(--ios-gray3);
+  border-radius: 31px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.ios-switch.active {
+  background-color: var(--ios-green);
+}
+
+.ios-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 27px;
+  height: 27px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.ios-switch.active::after {
+  transform: translateX(20px);
+}
+
+/* 动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+/* 呼吸动画 - 4-7-8 呼吸法 */
+@keyframes breathe-in_4s {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes breathe-hold_7s {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+}
+
+@keyframes breathe-out_8s {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.6);
+    opacity: 0.6;
+  }
+}
+
+/* iOS 导航栏 */
+.ios-navbar {
+  @apply sticky top-0 z-50;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(76, 175, 80, 0.1);
+}
+
+/* iOS Tab Bar */
+.ios-tabbar {
+  @apply fixed bottom-0 left-0 right-0;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(76, 175, 80, 0.1);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* iOS 滚动条隐藏 */
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+  body {
+    font-size: 17px;
+  }
+
+  .ios-card {
+    @apply rounded-2xl;
+  }
+
+  .ios-btn {
+    @apply text-lg;
+  }
+}

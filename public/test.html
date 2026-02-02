@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单测试</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            font-family: Arial, sans-serif;
+        }
+        .box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 { color: #2E7D32; }
+        .red-box {
+            background: #FF5252;
+            color: white;
+            padding: 40px;
+            font-size: 28px;
+            text-align: center;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .blue-button {
+            background: #2196F3;
+            color: white;
+            padding: 20px 40px;
+            font-size: 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+        }
+        .blue-button:hover { background: #1976D2; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>✅ 测试成功！</h1>
+        <p>如果你能看到这个页面，说明服务器工作正常！</p>
+    </div>
+
+    <div class="red-box">
+        🔴 这是一个红色测试方块
+    </div>
+
+    <button class="blue-button" onclick="alert('按钮点击成功！')">
+        点击测试
+    </button>
+
+    <div class="box">
+        <h3>下一步：</h3>
+        <p>1. 如果上面能正常显示，说明基础功能正常</p>
+        <p>2. 请访问：<a href="/wellness">http://localhost:3001/wellness</a></p>
+        <p>3. 如果还是空白，说明是 React 应用的问题</p>
+    </div>
+
+    <script>
+        console.log('========================================');
+        console.log('测试页面加载成功！');
+        console.log('当前时间:', new Date().toLocaleString('zh-CN'));
+        console.log('当前页面:', window.location.href);
+        console.log('========================================');
+    </script>
+</body>
+</html>

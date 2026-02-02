@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图标生成器 - 疗愈空间</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f5f5f7;
+    }
+    h1 { color: #1d1d1f; }
+    .container {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    canvas {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin: 10px 0;
+    }
+    button {
+      background: #007AFF;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    button:hover {
+      background: #0051D5;
+    }
+    .icons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .icon-item {
+      background: #f9f9f9;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+    }
+    .icon-item img {
+      max-width: 100%;
+      border-radius: 4px;
+    }
+    .icon-item p {
+      margin: 8px 0 0 0;
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎨 疗愈空间 - 图标生成器</h1>
+
+  <div class="container">
+    <h2>步骤 1: 生成所有尺寸图标</h2>
+    <p>点击下面的按钮生成所有需要的图标尺寸：</p>
+    <button onclick="generateAllIcons()">生成所有图标</button>
+  </div>
+
+  <div class="container">
+    <h2>步骤 2: 下载图标</h2>
+    <p>生成完成后，右键点击每个图标选择"图片另存为"，保存到 <code>public/icons/</code> 目录：</p>
+    <div class="icons-grid" id="iconsGrid"></div>
+  </div>
+
+  <div class="container">
+    <h2>步骤 3: 完成安装</h2>
+    <ol>
+      <li>下载所有图标到 <code>public/icons/</code> 目录</li>
+      <li>确保文件名与下方显示的完全一致</li>
+      <li>重启开发服务器</li>
+      <li>在手机浏览器中访问应用</li>
+    </ol>
+  </div>
+
+  <script>
+    const sizes = [
+      { size: 72, name: 'icon-72x72.png' },
+      { size: 96, name: 'icon-96x96.png' },
+      { size: 128, name: 'icon-128x128.png' },
+      { size: 144, name: 'icon-144x144.png' },
+      { size: 152, name: 'icon-152x152.png' },
+      { size: 192, name: 'icon-192x192.png' },
+      { size: 384, name: 'icon-384x384.png' },
+      { size: 512, name: 'icon-512x512.png' },
+      { size: 192, name: 'icon-maskable-192x192.png', maskable: true },
+      { size: 512, name: 'icon-maskable-512x512.png', maskable: true },
+    ];
+
+    function drawIcon(canvas, size, maskable = false) {
+      const ctx = canvas.getContext('2d');
+      const scale = size / 512;
+
+      // 清除画布
+      ctx.clearRect(0, 0, size, size);
+
+      if (maskable) {
+        // Maskable 版本：简单圆角矩形
+        ctx.fillStyle = '#007AFF';
+        const padding = size * 0.1;
+        roundRect(ctx, padding, padding, size - padding * 2, size - padding * 2, size * 0.15);
+        ctx.fill();
+
+        // 白色图标
+        ctx.fillStyle = 'white';
+        ctx.font = `bold ${size * 0.35}px system-ui`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('🌿', size / 2, size / 2);
+      } else {
+        // 渐变背景
+        const gradient = ctx.createLinearGradient(0, 0, size, size);
+        gradient.addColorStop(0, '#007AFF');
+        gradient.addColorStop(1, '#5856D6');
+
+        ctx.fillStyle = gradient;
+        roundRect(ctx, 0, 0, size, size, size * 0.195);
+        ctx.fill();
+
+        // 白色圆圈
+        ctx.fillStyle = 'rgba(255,255,255,0.9)';
+        ctx.beginPath();
+        ctx.arc(size / 2, size * 0.43, size * 0.156, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 绿色叶子
+        ctx.fillStyle = '#34C759';
+        ctx.beginPath();
+        ctx.ellipse(size / 2, size * 0.43, size * 0.078, size * 0.117, Math.PI / 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#30D158';
+        ctx.beginPath();
+        ctx.ellipse(size / 2, size * 0.43, size * 0.059, size * 0.09, Math.PI / 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 文字
+        ctx.fillStyle = 'white';
+        ctx.font = `bold ${size * 0.14}px system-ui`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('疗愈空间', size / 2, size * 0.74);
+
+        // 装饰点
+        const dotPositions = [0.254, 0.352, 0.648, 0.746];
+        const dotColors = ['#FF9500', '#34C759', '#5856D6', '#FF3B30'];
+
+        dotPositions.forEach((pos, i) => {
+          ctx.fillStyle = dotColors[i];
+          ctx.beginPath();
+          ctx.arc(size * pos, size * 0.84, size * 0.029, 0, Math.PI * 2);
+          ctx.fill();
+        });
+      }
+    }
+
+    function roundRect(ctx, x, y, width, height, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+    }
+
+    function generateAllIcons() {
+      const grid = document.getElementById('iconsGrid');
+      grid.innerHTML = '';
+
+      sizes.forEach(({ size, name, maskable }) => {
+        const canvas = document.createElement('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        drawIcon(canvas, size, maskable);
+
+        const item = document.createElement('div');
+        item.className = 'icon-item';
+
+        const img = document.createElement('img');
+        img.src = canvas.toDataURL('image/png');
+        img.width = Math.min(size, 128);
+
+        const p = document.createElement('p');
+        p.textContent = name;
+
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = name;
+        link.textContent = '⬇️ 下载';
+
+        item.appendChild(img);
+        item.appendChild(p);
+        item.appendChild(document.createElement('br'));
+        item.appendChild(link);
+
+        grid.appendChild(item);
+      });
+    }
+  </script>
+</body>
+</html>
